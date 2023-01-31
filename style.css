@@ -13,6 +13,19 @@ h1 {
 h1:hover {
     transform: skewX(1.1);
 }
+.welcome-travel{
+    position: sticky;
+    background: rgba(220, 242, 245, 0.555);
+}
+
+.travel-img {
+    width: 100% ;
+    position: absolute;
+    z-index: -1;
+}
+.form-bg{
+    background: #1f291bd5;
+}
 
 @media only screen and (max-width: 767px) {
     h1 {
