@@ -1,3 +1,59 @@
+<?php
+$insert = false;
+if(isset($_POST['name'])){
+//SET CONNECTION VARIABLES
+$server = "localhost";
+$username = "root";
+$password = "";
+
+//CREATE A DATABASE CONNECTION
+$con = mysqli_connect($server, $username, $password);  //CONNECTION MAKE WITH DATABASE 
+
+//TO CHECK THE CONNECTION MAKE WITH DATABASE USE THIS 
+
+if(!$con){
+    die("connection to this database failed due to" . 
+    mysqli_connect_errno());
+}
+// echo "Success connecting to the db";
+
+
+//COLLECT POST VARIABLES
+// BELOW CODE AND FIELD LINK WITH EACH OTHER AND CREATED ACCORDINGLY
+$name = $_POST["name"];
+$age = $_POST["age"];
+$phone = $_POST["phone"];
+$email = $_POST["email"];
+$password = $_POST["password"];
+//THERE IS TRAVEL TRAVEL IN INSERT FIRST ONE IS DB NAME AND SECOND ONE IS TABLE NAME
+$sql = " INSERT INTO `travel`.`travel` ( `name`, `age`, `phone`, `email`, `password`, `dt`) 
+VALUES ('$name', '$age', '$phone', '$email', '$password', 
+current_timestamp());";
+// echo $sql;
+
+
+//TO INSERT WITH DATABASE  -> OBJECT OPERATOR
+//EXECUTE THE QUERY
+if($con->query($sql) == true){
+        // echo "Successfully inserted";
+
+        //FOR SUCCESSFUL INSERTION
+        $insert = true;
+}
+else{
+    echo "ERROR: $sql <br> $con->error";
+}
+
+
+//CLOSE THE DATABASE CONNECTION IMP TO CLOSE 
+$con->close();          //CONNECTION CLOSED WHEN WORK DONE 
+}
+?>
+
+
+<!-- HTML -->
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,20 +82,25 @@
         Enter your details and submit this form to confirm your participation in
         the trip
       </p>
-      <h2 class="bg-light p-2 text-center mt-4">
+      <?php 
+      if($insert == true){
+      echo "<h2 class='bg-light p-2 text-center mt-4'>
         Thanks for submitting your form.
-      </h2>
+      </h2>";
+    }
+      ?>
     </div>
     <div class="container mt-5">
-      <form class="form-bg text-white p-5 rounded">
+      <form action="form.php" method="post"    class="form-bg text-white p-5 rounded">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputName1">Your Name</label>
+              <label for="name">Your Name</label>
               <input
                 type="text"
+                name="name"
                 class="form-control"
-                id="exampleInputName1"
+                id="name"
                 aria-describedby="nameHelp"
                 placeholder="Enter your name"
               />
@@ -47,11 +108,12 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputAge1">Your Age</label>
+              <label for="age">Your Age</label>
               <input
                 type="text"
+                name="age"
                 class="form-control"
-                id="exampleInputAge1"
+                id="age"
                 aria-describedby="ageHelp"
                 placeholder="Enter your age"
               />
@@ -61,11 +123,12 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputPhone1">Phone</label>
+              <label for="phone">Phone</label>
               <input
                 type="phone"
+                name="phone"
                 class="form-control"
-                id="exampleInputPhone1"
+                id="phone"
                 aria-describedby="phoneHelp"
                 placeholder="Enter your number"
               />
@@ -73,14 +136,15 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
+              <label for="email">Email address</label>
               <input
                 type="email"
+                name="email"
                 class="form-control"
-                id="exampleInputEmail1"
+                id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
-              required/>
+              />
               <small id="emailHelp" class="form-text text-muted"
                 >We'll never share your email with anyone else.</small
               >
@@ -90,13 +154,14 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label for="password">Password</label>
               <input
                 type="password"
+                name="password"
                 class="form-control"
-                id="exampleInputPassword1"
+                id="password"
                 placeholder="Password"
-                required/>
+                />
             </div>
           </div>
         </div>
@@ -135,5 +200,5 @@
 
 <!-- COPY FROM DATABASE AFTER TESTING FIRST TESTING -->
 
-<!-- INSERT INTO `travel` (`sno`, `name`, `age`, `phone`, `email`, `password`, `dt`) VALUES ('1', 'testname', '3', '9999999999999', 'this@this.com', 'this is my first message.', current_timestamp()); -->
+ <!-- INSERT INTO `travel` (`sno`, `name`, `age`, `phone`, `email`, `password`, `dt`) VALUES ('1', 'testname', '3', '9999999999999', 'this@this.com', 'this is my first message.', current_timestamp());  -->
 
