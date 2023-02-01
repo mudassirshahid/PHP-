@@ -103,7 +103,7 @@ $con->close();          //CONNECTION CLOSED WHEN WORK DONE
                 id="name"
                 aria-describedby="nameHelp"
                 placeholder="Enter your name"
-              />
+                required/>
             </div>
           </div>
           <div class="col-md-6">
@@ -131,7 +131,7 @@ $con->close();          //CONNECTION CLOSED WHEN WORK DONE
                 id="phone"
                 aria-describedby="phoneHelp"
                 placeholder="Enter your number"
-              />
+              required/>
             </div>
           </div>
           <div class="col-md-6">
@@ -144,7 +144,7 @@ $con->close();          //CONNECTION CLOSED WHEN WORK DONE
                 id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
-              />
+                required/>
               <small id="emailHelp" class="form-text text-muted"
                 >We'll never share your email with anyone else.</small
               >
@@ -161,7 +161,7 @@ $con->close();          //CONNECTION CLOSED WHEN WORK DONE
                 class="form-control"
                 id="password"
                 placeholder="Password"
-                />
+                required/>
             </div>
           </div>
         </div>
